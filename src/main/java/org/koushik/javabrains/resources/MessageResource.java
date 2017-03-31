@@ -25,9 +25,8 @@ public class MessageResource {
     @GET
     @Path("/{messageId}")
     //http://localhost:8080/webapi/messages/1
-    @Produces(MediaType.TEXT_PLAIN)
-    public String test(@PathParam("messageId") String messageId){
-        //messageService.getMessage(messageId)
-        return "Got path param = " + messageId;
+    @Produces(MediaType.APPLICATION_XML)
+    public Message getMessage(@PathParam("messageId") long id) {
+        return messageService.getMessage(id);
     }
 }
