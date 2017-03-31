@@ -1,9 +1,6 @@
 package org.koushik.javabrains.resources;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import java.util.List;
@@ -20,6 +17,13 @@ public class MessageResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Message> getMessages(){
         return messageService.getAllMessages();
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    //http://localhost:8080/webapi/messages/
+    public String addMessage(){
+        return "POST works";
     }
 
     @GET
