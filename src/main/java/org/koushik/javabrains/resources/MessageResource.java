@@ -17,7 +17,7 @@ public class MessageResource {
 
     @GET
     //http://localhost:8080/webapi/messages/
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Message> getMessages(){
         return messageService.getAllMessages();
     }
@@ -25,7 +25,7 @@ public class MessageResource {
     @GET
     @Path("/{messageId}")
     //http://localhost:8080/webapi/messages/1
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_JSON)
     public Message getMessage(@PathParam("messageId") long id) {
         return messageService.getMessage(id);
     }
