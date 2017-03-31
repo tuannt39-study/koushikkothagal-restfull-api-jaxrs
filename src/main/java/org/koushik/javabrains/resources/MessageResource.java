@@ -22,8 +22,8 @@ public class MessageResource {
     }
 
     @GET
-    @Path("/test")
-    //http://localhost:8080/webapi/messages/test
+    @Path("/{messageId}")
+    //http://localhost:8080/webapi/messages/1
     @Produces(MediaType.TEXT_PLAIN)
     public String test(){
         return "test";
