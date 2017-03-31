@@ -2,6 +2,7 @@ package org.koushik.javabrains.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -25,7 +26,8 @@ public class MessageResource {
     @Path("/{messageId}")
     //http://localhost:8080/webapi/messages/1
     @Produces(MediaType.TEXT_PLAIN)
-    public String test(){
-        return "test";
+    public String test(@PathParam("messageId") String messageId){
+        //messageService.getMessage(messageId)
+        return "Got path param = " + messageId;
     }
 }
