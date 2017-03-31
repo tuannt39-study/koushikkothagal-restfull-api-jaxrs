@@ -15,8 +15,17 @@ public class MessageResource {
     MessageService messageService = new MessageService();
 
     @GET
+    //http://localhost:8080/webapi/messages/
     @Produces(MediaType.APPLICATION_XML)
     public List<Message> getMessages(){
         return messageService.getAllMessages();
+    }
+
+    @GET
+    @Path("/test")
+    //http://localhost:8080/webapi/messages/test
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test(){
+        return "test";
     }
 }
