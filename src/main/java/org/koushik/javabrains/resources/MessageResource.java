@@ -1,6 +1,7 @@
 package org.koushik.javabrains.resources;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -37,6 +38,13 @@ public class MessageResource {
     public Message updateMessage(@PathParam("messageId") long id, Message message) {
         message.setId(id);
         return messageService.updateMessage(message);
+    }
+
+    @DELETE
+    @Path("/{messageId}")
+    //http://localhost:8080/webapi/messages/1
+    public void deleteMessage(@PathParam("messageId") long id) {
+        messageService.removeMessage(id);
     }
 
     @GET
