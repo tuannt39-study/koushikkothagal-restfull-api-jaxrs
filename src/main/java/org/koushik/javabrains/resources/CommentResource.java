@@ -2,6 +2,7 @@ package org.koushik.javabrains.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 @Path("/")
 //http://localhost:8080/webapi/messages/100/comments
@@ -14,7 +15,7 @@ public class CommentResource {
     @GET
     @Path("/{commentId}")
     //http://localhost:8080/webapi/messages/100/comments/200
-    public String test2(){
-        return "Method to return comment ID";
+    public String test2(@PathParam("commentId") long commentID){
+        return "Method to return comment ID = " + commentID;
     }
 }
