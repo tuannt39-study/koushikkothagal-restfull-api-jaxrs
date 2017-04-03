@@ -15,7 +15,8 @@ public class CommentResource {
     @GET
     @Path("/{commentId}")
     //http://localhost:8080/webapi/messages/100/comments/200
-    public String test2(@PathParam("commentId") long commentID){
-        return "Method to return comment ID = " + commentID;
+    public String test2(@PathParam("messageId") long messageID,
+                        @PathParam("commentId") long commentID){
+        return "Method to return comment ID = " + commentID + " - for message = " + messageID;
     }
 }
