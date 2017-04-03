@@ -1,5 +1,7 @@
 package org.koushik.javabrains.resources;
 
+import java.util.List;
+
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -9,10 +11,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
-import java.util.List;
+import javax.ws.rs.core.Response;
 
 import org.koushik.javabrains.model.Message;
 import org.koushik.javabrains.resources.bean.MessageFilterBean;
@@ -37,8 +37,12 @@ public class MessageResource {
     }
 
     @POST
-    public Message addMessage(Message message) {
-        return messageService.addMessage(message);
+    public Response addMessage(Message message) {
+        Message newMessage = messageService.addMessage(message);
+        return Response.status(Response.Status.CREATED)
+                .entity(newMessage)
+                .build();
+        //return messageService.addMessage(message);
     }
 
     @PUT
