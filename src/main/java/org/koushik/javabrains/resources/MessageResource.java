@@ -62,4 +62,11 @@ public class MessageResource {
     public Message getMessage(@PathParam("messageId") long id) {
         return messageService.getMessage(id);
     }
+
+    @GET
+    @Path("/{messageId}/comments")
+    //http://localhost:8080/webapi/messages/1/comments
+    public String test(){
+        return "test";
+    }
 }
