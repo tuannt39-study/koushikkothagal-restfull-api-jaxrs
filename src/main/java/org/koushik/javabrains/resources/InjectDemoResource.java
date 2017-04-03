@@ -8,6 +8,7 @@ import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
@@ -23,14 +24,15 @@ public class InjectDemoResource {
     public String getParamsUsingAnnotations(@MatrixParam("param") String matrixParam,
                                             @HeaderParam("authSessionID") String header,
                                             @CookieParam("name") String cookie) {
-        return "Matrix param = " + matrixParam + " - Header param = " + header + " - Cookie param: " + cookie;
+        return "Matrix param = " + matrixParam + " - Header param = " + header + " - Cookie param = " + cookie;
     }
 
     @GET
     @Path("context")
     //http://localhost:8080/webapi/injectdemo/context
-    public String getParamsUsingContext(@Context UriInfo uriInfo) {
+    public String getParamsUsingContext(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
         String path = uriInfo.getAbsolutePath().toString();
-        return "Path = " + path;
+        String cookies = headers.getCookies().toString();
+        return "Path = " + path + " - Cookies = " + cookies;
     }
 }
