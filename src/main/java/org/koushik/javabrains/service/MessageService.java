@@ -14,7 +14,6 @@ public class MessageService {
 
 	public MessageService() {
 		messages.put(1L, new Message(1, "Hello World 1", "Tuân 1"));
-		messages.put(2L, new Message(2, "Hello World 2", "Tuân 2"));
 	}
 
 	public List<Message> getAllMessages() {
@@ -24,20 +23,21 @@ public class MessageService {
 	public List<Message> getAllMessagesForYear(int year) {
 		List<Message> messagesForYear = new ArrayList<>();
 		Calendar cal = Calendar.getInstance();
-		for (Message message : messages.values()){
+		for (Message message : messages.values()) {
 			cal.setTime(message.getCreated());
-			if (cal.get(Calendar.YEAR) == year){
+			if (cal.get(Calendar.YEAR) == year) {
 				messagesForYear.add(message);
 			}
 		}
 		return messagesForYear;
 	}
 
-	public List<Message> getAllMessagesPaginated (int start, int size){
+	public List<Message> getAllMessagesPaginated(int start, int size) {
 		ArrayList<Message> list = new ArrayList<Message>(messages.values());
 		if (start + size > list.size()) return new ArrayList<Message>();
 		return list.subList(start, start + size);
 	}
+
 
 	public Message getMessage(long id) {
 		return messages.get(id);
