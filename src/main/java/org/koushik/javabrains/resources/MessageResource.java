@@ -13,8 +13,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.koushik.javabrains.model.Message;
 import org.koushik.javabrains.resources.bean.MessageFilterBean;
@@ -39,7 +41,8 @@ public class MessageResource {
     }
 
     @POST
-    public Response addMessage(Message message) throws URISyntaxException{
+    public Response addMessage(Message message, @Context UriInfo uriInfo) throws URISyntaxException{
+        System.out.print(uriInfo.getAbsolutePath());
         Message newMessage = messageService.addMessage(message);
         return Response.created(new URI("/webapi/messages/" + newMessage.getId()))
                 .entity(newMessage)
