@@ -1,6 +1,7 @@
 package org.koushik.javabrains.resources;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.MatrixParam;
@@ -16,7 +17,8 @@ public class InjectDemoResource {
     @GET
     @Path("annotations")
     public String getParamsUsingAnnotations(@MatrixParam("param") String matrixParam,
-                                            @HeaderParam("customHeaderValue") String header) {
-        return "Matrix param = " + matrixParam + " - Header param = " + header;
+                                            @HeaderParam("authSessionID") String header,
+                                            @CookieParam("name") String cookie) {
+        return "Matrix param = " + matrixParam + " - Header param = " + header + " - Cookie param: " + cookie;
     }
 }
