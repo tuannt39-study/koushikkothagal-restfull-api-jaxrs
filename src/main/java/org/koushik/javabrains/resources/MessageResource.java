@@ -1,5 +1,7 @@
 package org.koushik.javabrains.resources;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ws.rs.BeanParam;
@@ -37,9 +39,9 @@ public class MessageResource {
     }
 
     @POST
-    public Response addMessage(Message message) {
+    public Response addMessage(Message message) throws URISyntaxException{
         Message newMessage = messageService.addMessage(message);
-        return Response.status(Response.Status.CREATED)
+        return Response.created(new URI("/webapi/messages/" + newMessage.getId()))
                 .entity(newMessage)
                 .build();
         //return messageService.addMessage(message);
