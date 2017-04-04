@@ -78,7 +78,10 @@ public class MessageResource {
     private String getUriForComments(UriInfo uriInfo, Message message) {
         URI uri = uriInfo.getBaseUriBuilder()
                 .path(MessageResource.class) //http://localhost:8080/webapi
-                .build();
+                .path(MessageResource.class, "getCommentResource") //messages
+                .path(CommentResource.class) //comments
+                .resolveTemplate("messageId", message.getId())
+                .build(); //{commentId}
         return uri.toString();
     }
 
