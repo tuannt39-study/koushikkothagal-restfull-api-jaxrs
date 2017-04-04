@@ -67,8 +67,15 @@ public class MessageResource {
     @GET
     @Path("/{messageId}")
     //http://localhost:8080/webapi/messages/1
-    public Message getMessage(@PathParam("messageId") long id) {
-        return messageService.getMessage(id);
+    public Message getMessage(@PathParam("messageId") long id, @Context UriInfo uriInfo) {
+        Message message = messageService.getMessage(id);
+        String uri = uriInfo.getBaseUriBuilder()
+                .path(MessageResource.class) //http://localhost:8080/webapi
+                .path(Long.toString(message.getId())) //messages
+                .build() //{messageId}
+                .toString();
+        message.addLink(uri, "self");
+        return message;
     }
 
     @Path("/{messageId}/comments")
