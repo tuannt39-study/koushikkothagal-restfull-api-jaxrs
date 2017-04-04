@@ -69,13 +69,26 @@ public class MessageResource {
     //http://localhost:8080/webapi/messages/1
     public Message getMessage(@PathParam("messageId") long id, @Context UriInfo uriInfo) {
         Message message = messageService.getMessage(id);
+        message.addLink(getUriForSelf(uriInfo, message), "self");
+        message.addLink(getUriForProfile(uriInfo, message), "profile");
+        return message;
+    }
+
+    private String getUriForProfile(UriInfo uriInfo, Message message) {
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(ProfileResource.class) //http://localhost:8080/webapi
+                .path(message.getAuthor()) //profiles
+                .build(); //{authorName}
+        return uri.toString();
+    }
+
+    private String getUriForSelf(UriInfo uriInfo, Message message) {
         String uri = uriInfo.getBaseUriBuilder()
                 .path(MessageResource.class) //http://localhost:8080/webapi
                 .path(Long.toString(message.getId())) //messages
                 .build() //{messageId}
                 .toString();
-        message.addLink(uri, "self");
-        return message;
+        return uri;
     }
 
     @Path("/{messageId}/comments")
